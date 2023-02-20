@@ -30,10 +30,10 @@
         <del class="h6" v-if="product.price">原價 {{ product.origin_price }} 元</del>
         <div class="h5" v-if="product.price">現在只要 {{ product.price }} 元</div>
         <hr>
-        <button type="button" class="btn btn-outline-danger"
-          @click="addToCart(product.id)">
-          加到購物車
-        </button>
+        <div class="input-group">
+          <input type="number" class="form-control" min="1" v-model.number="qty">
+          <button type="button" class="btn btn-primary" :disabled="qty < 1" @click="addToCart(product.id, qty)">加入購物車</button>
+        </div>
       </div>
     </div>
   </div>
@@ -51,6 +51,7 @@ export default {
     return {
       id: '',
       product: {},
+      qty: 1
     };
   },
   methods: {
