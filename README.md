@@ -1,4 +1,4 @@
-[Github Page](https://noname135.github.io/Vue-Homework-Vite/){:target="_blank" rel="noopener"}
+[Github Page](https://noname135.github.io/Vue-Homework-Vite/)
 
 # homework-vite
 
