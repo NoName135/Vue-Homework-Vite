@@ -58,7 +58,8 @@
               type="number"
               class="form-control"
               id="price"
-              min="0"
+              min="1"
+              max="99"
               v-model.number="tempCoupon.percent"
               placeholder="請輸入折扣百分比"
             />

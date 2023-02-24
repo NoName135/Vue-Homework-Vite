@@ -88,27 +88,32 @@ export default {
       this.$refs.couponModal.openModal()
     },
     updateCoupon(coupon) {
-      const httpVerb = this.isNew ? 'post' : 'put';
-      let url = `${VITE_API}api/${VITE_PATH}/admin/coupon`;
-      if (!this.isNew) {
-        url = `${VITE_API}api/${VITE_PATH}/admin/coupon/${coupon.id}`;
-      }
+      if(coupon.percent < 1 || coupon.percent >= 100) {
+        this.triggerToast('info', "coupon折扣百分比需介於1~99")
+        return
+      }else{
+        const httpVerb = this.isNew ? 'post' : 'put';
+        let url = `${VITE_API}api/${VITE_PATH}/admin/coupon`;
+        if (!this.isNew) {
+          url = `${VITE_API}api/${VITE_PATH}/admin/coupon/${coupon.id}`;
+        }
 
-      this.loadings.pageLoading = true;
-      this.$http
-        [httpVerb](url, {data:{...coupon}})
-        .then((res) => {
-          this.$refs.couponModal.hideModal()
-          this.getCoupons();
-          this.loadings.pageLoading = false;
-          //Swal
-          this.triggerToast('success', this.isNew ? "已新增優惠券" : "已更新優惠券")
-        })
-        .catch((err) => {
-          this.loadings.pageLoading = false;
-          //Swal
-          this.triggerToast('error', err.response.data.message);
-        });
+        this.loadings.pageLoading = true;
+        this.$http
+          [httpVerb](url, {data:{...coupon}})
+          .then((res) => {
+            this.$refs.couponModal.hideModal()
+            this.getCoupons();
+            this.loadings.pageLoading = false;
+            //Swal
+            this.triggerToast('success', this.isNew ? "已新增優惠券" : "已更新優惠券")
+          })
+          .catch((err) => {
+            this.loadings.pageLoading = false;
+            //Swal
+            this.triggerToast('error', err.response.data.message);
+          });
+      }
     },
     ...mapActions(modalStore, ['createDeleteModalRef', 'openModal']),
     ...mapActions(couponsStore, ['getCoupons']),

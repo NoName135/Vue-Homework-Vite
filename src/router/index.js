@@ -56,7 +56,7 @@ const routes = [
     ],
   },
   {
-    path: "/admin/:pathMatch(.*)*",
+    path: "/:pathMatch(.*)*",
     redirect: { name: "產品列表" },
   },
 ];
