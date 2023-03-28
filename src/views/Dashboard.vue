@@ -25,7 +25,7 @@ export default {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)loginToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
     this.$http.defaults.headers.common.Authorization = `${token}`;
 
-    const api = `${VITE_API}api/user/check`;
+    const api = `${VITE_API}/api/user/check`;
     this.$http.post(api)
       .then((res) => {
         this.checkLogin = true;
